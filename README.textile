@@ -1,0 +1,10 @@
+h1. Jbbarth's Chef Cookbooks
+
+This repository aims at storing some cookbooks I use to configure my servers at $HOME 
+with "Chef":http://www.opscode.com/chef, the awesome configuration management tool from 
+Opscode, used by EngineYard, 37signals, etc.
+
+This repo is for my personal use, most cookbooks and recipes you can find here won't be 
+re-usable easily. If you're searching generic recipes you can re-use easily, I suggest 
+you go to "this page":http://wiki.opscode.com/display/chef/Cookbooks and look at the 
+section "Where can I find some pre-made cookbooks ?"
