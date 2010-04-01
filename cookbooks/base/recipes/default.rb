@@ -29,3 +29,11 @@ execute "apt-get update"
 list.each do |pkg|
   package pkg
 end
+
+#links to ruby utils
+%w(ruby ri rdoc gem).each do |bin|
+  link "/usr/bin/#{bin}" do
+    to "/usr/bin/#{bin}1.8"
+    link_type :symbolic
+  end
+end
