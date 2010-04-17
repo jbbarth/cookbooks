@@ -23,7 +23,7 @@ node[:user] ||= "salvor"
 list = %w(zsh screen vim openssh-server git-core subversion make sysv-rc-conf nfs-common tree
           ruby1.8 ruby1.8-dev ri1.8 rake irb rubygems1.8 libopenssl-ruby libsqlite3-ruby1.8
           sqlite3 libsqlite3-dev sysv-rc-conf sysklogd libxslt1.1 libxslt1-dev gawk ncurses-term
-          cryptsetup)
+          cryptsetup libmysqlclient-dev)
 list += %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly
           ttf-mscorefonts-installer ttf-liberation ttf-dejavu libgsf-bin imagemagick mplayerthumbs 
           xul-ext-firebug xchm wicd w32codecs irssi conky colordiff p7zip xfce4-terminal) if node[:domain] == "home"
@@ -35,7 +35,7 @@ list.each do |pkg|
 end
 
 #gem packages
-gems = %w(rails rake ZenTest ruby-debug wirble hpricot nokogiri webrat rspec-rails rspec cucumber)
+gems = %w(rails rake ZenTest ruby-debug wirble hpricot nokogiri webrat rspec-rails rspec cucumber mysql)
 gems.each do |gem|
   gem_package gem
 end
