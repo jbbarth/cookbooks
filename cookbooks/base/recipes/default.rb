@@ -46,3 +46,10 @@ if File.exists?(%x(which gconftool-2).chomp)
   execute "gconftool-2 --set /desktop/gnome/interface/menus_have_icons 1 --type boolean"
   execute "gconftool-2 --set /desktop/gnome/interface/buttons_have_icons 1 --type boolean"
 end
+
+#git config
+cmd = "git config --global"
+attrs = { "user.name"  => "jbbarth", "user.email" => "jeanbaptiste.barth@gmail.com" }
+attrs.each do |k,v|
+  execute "#{cmd} #{k} #{v}" unless %x(#{cmd} --get #{k}).chomp == v
+end
