@@ -67,3 +67,11 @@ attrs.each do |k,v|
     not_if "#{cmd} --get #{k} |grep #{v}", :user => node[:user]
   end
 end
+
+#disable touchpad when typing
+#see: http://ghantoos.org/2009/04/07/disable-touchpad-while-typing-on-keyboard/
+execute "echo '/usr/bin/syndaemon -i 1 -d -S' >> ~/.xsession" do
+  user node[:user]
+  not_if "grep syndaemon ~/.xsession", :user => node[:user]
+  only_if "which syndaemon"
+end
