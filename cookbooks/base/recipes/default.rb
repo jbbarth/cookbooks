@@ -51,5 +51,8 @@ end
 cmd = "git config --global"
 attrs = { "user.name"  => "jbbarth", "user.email" => "jeanbaptiste.barth@gmail.com" }
 attrs.each do |k,v|
-  execute "#{cmd} #{k} #{v}" unless %x(#{cmd} --get #{k}).chomp == v
+  execute "#{cmd} #{k} #{v}" do
+    user node[:user]
+    not_if "#{cmd} --get #{k} |grep #{v}", :user => node[:user]
+  end
 end
