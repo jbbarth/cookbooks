@@ -35,7 +35,8 @@ list.each do |pkg|
 end
 
 #gem packages
-gems = %w(rails rake ZenTest ruby-debug wirble hpricot nokogiri webrat rspec-rails rspec cucumber mysql)
+gems = %w(rails rake ZenTest ruby-debug wirble hpricot nokogiri webrat rspec-rails rspec cucumber mysql
+          sqlite3-ruby)
 gems.each do |gem|
   gem_package gem
 end
