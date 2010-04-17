@@ -77,7 +77,7 @@ execute "echo '/usr/bin/syndaemon -i 1 -d -S' >> ~/.xsession" do
 end
 
 #xfce4-terminal config
-execute "echo 'BindingBackspace=TERMINAL_ERASE_BINDING_ASCII_DELETE' >> .config/Terminal/terminalrc" do
+execute "echo 'BindingBackspace=TERMINAL_ERASE_BINDING_ASCII_DELETE' >> ~/.config/Terminal/terminalrc" do
   user node[:user]
   not_if "grep 'BindingBackspace' ~/.config/Terminal/terminalrc", :user => node[:user]
   only_if do node[:domain] == "home" end
