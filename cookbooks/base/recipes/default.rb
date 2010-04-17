@@ -41,10 +41,12 @@ end
 
 #configure gnome if present
 if File.exists?(%x(which gconftool-2).chomp)
-  execute "gconftool-2 --set /desktop/gnome/interface/buttons_have_icons --type bool true"
-  execute "gconftool-2 --set /desktop/gnome/interface/menus_have_icons --type bool true"
-  execute "gconftool-2 --set /desktop/gnome/interface/menus_have_icons 1 --type boolean"
-  execute "gconftool-2 --set /desktop/gnome/interface/buttons_have_icons 1 --type boolean"
+  %w(buttons menus).each do |item|
+    execute "gconftool-2 --set /desktop/gnome/interface/#{item}_have_icons --type bool true" do
+      user node[:user]
+      not_if "gconftool-2 --get /desktop/gnome/interface/#{item}_have_icons|grep true", :user => node[:user]
+    end
+  end
 end
 
 #git config
