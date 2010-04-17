@@ -80,4 +80,5 @@ end
 execute "echo 'BindingBackspace=TERMINAL_ERASE_BINDING_ASCII_DELETE' >> .config/Terminal/terminalrc" do
   user node[:user]
   not_if "grep 'BindingBackspace' ~/.config/Terminal/terminalrc", :user => node[:user]
+  only_if do node[:domain] == "home" end
 end
