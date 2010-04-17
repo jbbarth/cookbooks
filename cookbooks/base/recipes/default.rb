@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+node[:user] ||= "salvor"
+
 list = %w(zsh screen vim openssh-server git-core subversion make sysv-rc-conf nfs-common tree
           ruby1.8 ruby1.8-dev ri1.8 rake irb rubygems1.8 libopenssl-ruby libsqlite3-ruby1.8
           sqlite3 libsqlite3-dev sysv-rc-conf sysklogd libxslt1.1 libxslt1-dev gawk ncurses-term
