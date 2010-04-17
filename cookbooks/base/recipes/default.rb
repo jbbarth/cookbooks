@@ -31,7 +31,7 @@ list += %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-
 execute "apt-get update"
 
 list.each do |pkg|
-  package pkg
+  apt_package pkg
 end
 
 #gem packages
