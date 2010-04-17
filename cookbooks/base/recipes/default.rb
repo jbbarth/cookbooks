@@ -40,9 +40,9 @@ end
 end
 
 #configure gnome if present
-if File.exists?(%x(which gconftool).chomp)
+if File.exists?(%x(which gconftool-2).chomp)
   execute "gconftool-2 --set /desktop/gnome/interface/buttons_have_icons --type bool true"
   execute "gconftool-2 --set /desktop/gnome/interface/menus_have_icons --type bool true"
-  execute "gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons 1"
-  execute "gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons 1"
+  execute "gconftool-2 --set /desktop/gnome/interface/menus_have_icons 1 --type boolean"
+  execute "gconftool-2 --set /desktop/gnome/interface/buttons_have_icons 1 --type boolean"
 end
