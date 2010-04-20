@@ -36,7 +36,7 @@ end
 
 #gem packages
 gems = %w(rails rake ZenTest ruby-debug wirble hpricot nokogiri webrat rspec-rails rspec cucumber mysql
-          sqlite3-ruby)
+          sqlite3-ruby nifty-generators)
 gems.each do |gem|
   gem_package gem
 end
