@@ -26,7 +26,7 @@ list = %w(zsh screen vim openssh-server git-core subversion make sysv-rc-conf nf
           cryptsetup libmysqlclient-dev god)
 list += %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly
           ttf-mscorefonts-installer ttf-liberation ttf-dejavu libgsf-bin imagemagick mplayerthumbs 
-          xul-ext-firebug xchm wicd w32codecs irssi conky colordiff p7zip xfce4-terminal) if node[:domain] == "home"
+          xul-ext-firebug xchm wicd w32codecs irssi conky colordiff p7zip xsel xfce4-terminal) if node[:domain] == "home"
 
 execute "apt-get update"
 
