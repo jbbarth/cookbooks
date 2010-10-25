@@ -21,9 +21,8 @@ node[:user] ||= "salvor"
 
 #apt packages
 list = %w(screen vim openssh-server git-core subversion make sysv-rc-conf nfs-common tree
-          ruby1.8 ruby1.8-dev ri1.8 rake irb rubygems1.8 libopenssl-ruby libsqlite3-ruby1.8
           sqlite3 libsqlite3-dev sysv-rc-conf sysklogd libxslt1.1 libxslt1-dev gawk ncurses-term
-          cryptsetup libmysqlclient-dev god)
+          cryptsetup libmysqlclient-dev)
 list += %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly ibam
           ttf-mscorefonts-installer ttf-liberation ttf-dejavu libgsf-bin imagemagick mplayerthumbs 
           xul-ext-firebug xchm wicd w32codecs irssi conky colordiff p7zip xsel xfce4-terminal) if node[:domain] == "home"
@@ -32,21 +31,6 @@ execute "apt-get update"
 
 list.each do |pkg|
   apt_package pkg
-end
-
-#gem packages
-gems = %w(rails rake ZenTest ruby-debug wirble hpricot nokogiri webrat rspec-rails rspec cucumber mysql
-          sqlite3-ruby nifty-generators)
-gems.each do |gem|
-  gem_package gem
-end
-
-#links to ruby utils
-%w(ruby ri rdoc gem).each do |bin|
-  link "/usr/bin/#{bin}" do
-    to "/usr/bin/#{bin}1.8"
-    link_type :symbolic
-  end
 end
 
 #configure gnome if present
