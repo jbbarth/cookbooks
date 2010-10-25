@@ -1,0 +1,1 @@
+default.zsh[:user]     = "salvor" 
