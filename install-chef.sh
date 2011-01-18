@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # This script install chef with rubygems
 

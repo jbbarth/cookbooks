@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "$(id -u)" != 0 ]; then
   echo "Vous devez lancer ce script avec l'utilisateur root!" >&2
