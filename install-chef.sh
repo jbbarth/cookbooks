@@ -26,7 +26,7 @@ group=$(id -g)
 rvm 1.9.2@chef --create
 
 # Install latest chef from rubygems.org
-gem install chef
+gem install chef --no-ri --no-rdoc
 
 # Create chef cookbooks directory (/var/chef/cookbooks)
 sudo mkdir -p /var/chef
