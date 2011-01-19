@@ -3,7 +3,11 @@
 # This script install chef with rubygems
 
 # You have to install RVM first
-if ! which rvm >/dev/null; then
+if [ -s "$HOME/.rvm/scripts/rvm" ]; then
+  source "$HOME/.rvm/scripts/rvm"
+elif [ -s "/usr/local/rvm/scripts/rvm" ]; then
+  source "/usr/local/rvm/scripts/rvm"
+else
   echo "Install RVM first !" >&2
   exit 1
 fi
