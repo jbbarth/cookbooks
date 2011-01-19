@@ -13,7 +13,7 @@ else
 fi
 
 # We work with ruby 1.9.2!
-if ! rvm list|grep 1.9.2 >/dev/null; then
+if ! rvm list|grep 1.9.2 >/dev/null 2>/dev/null; then
   echo "Install ruby 1.9.2: rvm install 1.9.2" >&2
   exit 1
 fi
