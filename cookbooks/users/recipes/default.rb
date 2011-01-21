@@ -2,7 +2,7 @@
 # Cookbook Name:: users
 # Recipe:: default
 #
-# Copyright 2010, Jean-Baptiste BARTH
+# Copyright 2011, Jean-Baptiste BARTH
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

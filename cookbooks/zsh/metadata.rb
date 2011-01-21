@@ -1,4 +1,4 @@
-maintainer       "jbbarth's personal cookbooks"
+maintainer       "Jean-Baptiste Barth"
 maintainer_email "jeanbaptiste.barth@gmail.com"
 license          "Apache 2.0"
 description      "Zsh the awesome shell"
