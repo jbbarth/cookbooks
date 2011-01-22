@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+apt_package "openssh-server"
+
 service "ssh" do
   supports :restart => true, :reload => true
   action :enable

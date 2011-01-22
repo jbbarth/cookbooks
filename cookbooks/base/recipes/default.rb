@@ -20,7 +20,7 @@
 node[:user] ||= "salvor"
 
 #apt packages
-list = %w(screen vim openssh-server subversion make sysv-rc-conf nfs-common tree
+list = %w(screen vim subversion make sysv-rc-conf nfs-common tree
           sqlite3 libsqlite3-dev sysv-rc-conf sysklogd libxslt1.1 libxslt1-dev gawk ncurses-term
           cryptsetup libmysqlclient-dev)
 list += %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly ibam
