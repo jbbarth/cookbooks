@@ -18,7 +18,7 @@ fi
 
 # Credentials
 user="root"
-group=$(id -g)
+group="rvm"
 
 # Create a gemset
 rvm 1.9.2@chef --create
