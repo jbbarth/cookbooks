@@ -22,7 +22,8 @@ node[:user] ||= "salvor"
 #apt packages
 list = %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly ibam cryptsetup
           ttf-mscorefonts-installer ttf-liberation ttf-dejavu libgsf-bin imagemagick mplayerthumbs irssi
-          xul-ext-firebug xchm wicd w32codecs conky colordiff p7zip xsel xfce4-terminal)
+          xul-ext-firebug xchm wicd w32codecs conky colordiff p7zip xsel xfce4-terminal libmysqlclient-dev
+          subversion)
 
 execute "apt-get update" do
   only_if { Time.now - File.mtime("/var/cache/apt/pkgcache.bin") > 3600*6 }

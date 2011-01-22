@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: base
+# Cookbook Name:: vim
 # Recipe:: default
 #
 # Copyright 2011, Jean-Baptiste Barth
@@ -16,14 +16,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-list = %w(screen ncurses-term sysv-rc-conf make nfs-common tree sysklogd
-          sqlite3 libsqlite3-dev sysklogd libxslt1.1 libxslt1-dev gawk)
-
-execute "apt-get update" do
-  only_if { Time.now - File.mtime("/var/cache/apt/pkgcache.bin") > 3600*6 }
-end
-
-list.each do |pkg|
-  apt_package pkg
-end
