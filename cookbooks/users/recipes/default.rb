@@ -75,7 +75,7 @@ end
 
 #if RVM is installed, add admins to RVM group
 group "rvm" do
-  members users.map{|u| u['id']}
+  members users.map{|u| u['id']} << "root"
   append true
   only_if "getent group rvm"
 end
