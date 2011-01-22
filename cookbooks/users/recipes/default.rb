@@ -45,6 +45,7 @@ end
     uid u['uid']
     gid user_gid
     shell u['shell']
+    password u['password']
     comment u['comment']
     supports :manage_home => true
     home home_dir
