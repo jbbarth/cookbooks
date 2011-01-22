@@ -25,25 +25,31 @@
 #   ...
 # ]
 begin
-  @users = JSON.parse(File.read("/etc/chef/users.json"))
+  users = JSON.parse(File.read("/etc/chef/users.json"))
 rescue
+  users = []
   log "Problem loading /etc/chef/users.json: #{$!}"
 end
 
 # Create the admins group
 group "admins" do
   gid 2000
-  #members ...
+end
+
+# if RVM is installed, add admins to RVM group
+group "rvm" do
+  members users.map{|u| u['id']}
+  append true
+  only_if "getent group rvm"
 end
 
 # Let's iterate over users
-@users && @users.each do |u|
+users.each do |u|
   home_dir = "/home/#{u['id']}"
-  user_gid = 2000
 
   user u['id'] do
     uid u['uid']
-    gid user_gid
+    gid "admins"
     shell u['shell']
     comment u['comment']
     supports :manage_home => true
@@ -61,14 +67,14 @@ end
 
   directory "#{home_dir}/.ssh" do
     owner u['id']
-    group user_gid
+    group "admins"
     mode "0700"
   end
 
   template "#{home_dir}/.ssh/authorized_keys" do
     source "authorized_keys.erb"
     owner u['id']
-    group user_gid
+    group "admins"
     mode "0600"
     variables :ssh_keys => u['ssh_keys']
   end
