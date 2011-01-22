@@ -17,43 +17,13 @@
 # limitations under the License.
 #
 
-node[:user] ||= "salvor"
+list = %w(screen ncurses-term sysv-rc-conf subversion make nfs-common tree sysklogd
+          sqlite3 libsqlite3-dev sysklogd libxslt1.1 libxslt1-dev gawk libmysqlclient-dev)
 
-#apt packages
-list = %w(screen vim subversion make sysv-rc-conf nfs-common tree
-          sqlite3 libsqlite3-dev sysv-rc-conf sysklogd libxslt1.1 libxslt1-dev gawk ncurses-term
-          cryptsetup libmysqlclient-dev)
-list += %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly ibam
-          ttf-mscorefonts-installer ttf-liberation ttf-dejavu libgsf-bin imagemagick mplayerthumbs 
-          xul-ext-firebug xchm wicd w32codecs irssi conky colordiff p7zip xsel xfce4-terminal) if node[:domain] == "home"
-
-execute "apt-get update"
+execute "apt-get update" do
+  only_if { Time.now - File.mtime("/var/cache/apt/pkgcache.bin") > 3600*6 }
+end
 
 list.each do |pkg|
   apt_package pkg
-end
-
-#configure gnome if present
-if File.exists?(%x(which gconftool-2).chomp)
-  %w(buttons menus).each do |item|
-    execute "gconftool-2 --set /desktop/gnome/interface/#{item}_have_icons --type bool true" do
-      user node[:user]
-      not_if "gconftool-2 --get /desktop/gnome/interface/#{item}_have_icons|grep true", :user => node[:user]
-    end
-  end
-end
-
-#disable touchpad when typing
-#see: http://ghantoos.org/2009/04/07/disable-touchpad-while-typing-on-keyboard/
-execute "echo '/usr/bin/syndaemon -i 1 -d -S' >> ~/.xsession" do
-  user node[:user]
-  not_if "grep syndaemon ~/.xsession", :user => node[:user]
-  only_if "which syndaemon"
-end
-
-#xfce4-terminal config
-execute "echo 'BindingBackspace=TERMINAL_ERASE_BINDING_ASCII_DELETE' >> ~/.config/Terminal/terminalrc" do
-  user node[:user]
-  not_if "grep 'BindingBackspace' ~/.config/Terminal/terminalrc", :user => node[:user]
-  only_if do node[:domain] == "home" end
 end
