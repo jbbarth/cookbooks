@@ -41,12 +41,6 @@ end
   home_dir = "/home/#{u['id']}"
   user_gid = 2000
 
-  #libshadow is needed to run password command
-  #and libshadow gem cannot be installed so easily
-  apt_package "libshadow-ruby1.8" do
-    action :install
-  end
-
   user u['id'] do
     uid u['uid']
     gid user_gid
