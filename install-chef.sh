@@ -45,5 +45,5 @@ sudo mkdir -p /etc/chef
 sudo chown -R $user:$group /etc/chef
 sudo find /etc/chef -type d -exec chmod 2775 {} \;
 sudo find /etc/chef -type f -exec chmod og+rw {} \;
-echo 'json_attribs "/etc/chef/dna.json"' > /etc/chef/solo.rb
-echo -e '{\n  "recipes": ["base"]\n}' > /etc/chef/dna.json
+[ -s "/etc/chef/solo.rb" ] || echo 'json_attribs "/etc/chef/dna.json"' > /etc/chef/solo.rb
+[ -s "/etc/chef/dna.json" ] || echo -e '{\n  "recipes": ["base"]\n}' > /etc/chef/dna.json
