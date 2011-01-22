@@ -36,13 +36,6 @@ group "admins" do
   gid 2000
 end
 
-# if RVM is installed, add admins to RVM group
-group "rvm" do
-  members users.map{|u| u['id']}
-  append true
-  only_if "getent group rvm"
-end
-
 # Let's iterate over users
 users.each do |u|
   home_dir = "/home/#{u['id']}"
@@ -79,3 +72,11 @@ users.each do |u|
     variables :ssh_keys => u['ssh_keys']
   end
 end
+
+#if RVM is installed, add admins to RVM group
+group "rvm" do
+  members users.map{|u| u['id']}
+  append true
+  only_if "getent group rvm"
+end
+
