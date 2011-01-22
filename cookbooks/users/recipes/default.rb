@@ -71,6 +71,13 @@ users.each do |u|
     mode "0600"
     variables :ssh_keys => u['ssh_keys']
   end
+
+  #dotfiles
+  execute "install-dotfiles-#{u['id']}" do
+    command "cd #{home_dir}; git init; git remote add origin #{u['dotfiles']}; git pull origin master"
+    user u['id']
+    only_if { u['dotfiles'] && !File.exists?(File.join(home_dir,".git")) }
+  end
 end
 
 #if RVM is installed, add admins to RVM group
