@@ -45,10 +45,18 @@ end
     uid u['uid']
     gid user_gid
     shell u['shell']
-    password u['password']
     comment u['comment']
     supports :manage_home => true
     home home_dir
+    #doesn't work: seems notifies cannot find a dynamically named resource
+    # notifies :run, "execute[change-passwd-#{u['id']}]"
+  end
+
+  #manage password manually...
+  execute "change-passwd-#{u['id']}" do
+    command "usermod -p '#{u['password']}' #{u['id']}"
+    not_if "getent shadow #{u['id']}|grep -F '$'"
+    only_if { u['password'] && u['password'].include?("$") }
   end
 
   directory "#{home_dir}/.ssh" do
