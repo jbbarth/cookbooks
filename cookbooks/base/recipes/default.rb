@@ -20,7 +20,7 @@
 node[:user] ||= "salvor"
 
 #apt packages
-list = %w(screen vim openssh-server git-core subversion make sysv-rc-conf nfs-common tree
+list = %w(screen vim openssh-server subversion make sysv-rc-conf nfs-common tree
           sqlite3 libsqlite3-dev sysv-rc-conf sysklogd libxslt1.1 libxslt1-dev gawk ncurses-term
           cryptsetup libmysqlclient-dev)
 list += %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly ibam
@@ -40,16 +40,6 @@ if File.exists?(%x(which gconftool-2).chomp)
       user node[:user]
       not_if "gconftool-2 --get /desktop/gnome/interface/#{item}_have_icons|grep true", :user => node[:user]
     end
-  end
-end
-
-#git config
-cmd = "git config --global"
-attrs = { "user.name"  => "jbbarth", "user.email" => "jeanbaptiste.barth@gmail.com" }
-attrs.each do |k,v|
-  execute "#{cmd} #{k} #{v}" do
-    user node[:user]
-    not_if "#{cmd} --get #{k} |grep #{v}", :user => node[:user]
   end
 end
 
