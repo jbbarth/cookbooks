@@ -30,7 +30,7 @@ gem install chef --no-ri --no-rdoc
 sudo mkdir -p /var/chef
 sudo chown -R $user:$group /var/chef
 sudo find /var/chef -type d -exec chmod 2775 {} \;
-sudo find /var/chef -type f -exec chmod og+rw {} \;
+sudo find /var/chef -type f -exec chmod ug+rw,o-rwx {} \;
 
 # Populate it!
 cd /var/chef
@@ -42,6 +42,6 @@ git pull origin master
 sudo mkdir -p /etc/chef
 sudo chown -R $user:$group /etc/chef
 sudo find /etc/chef -type d -exec chmod 2775 {} \;
-sudo find /etc/chef -type f -exec chmod og+rw {} \;
+sudo find /etc/chef -type f -exec chmod ug+rw,o-rwx {} \;
 [ -s "/etc/chef/solo.rb" ] || echo 'json_attribs "/etc/chef/dna.json"' > /etc/chef/solo.rb
 [ -s "/etc/chef/dna.json" ] || echo -e '{\n  "recipes": ["base"]\n}' > /etc/chef/dna.json
