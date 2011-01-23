@@ -17,13 +17,17 @@
 # limitations under the License.
 #
 
-list = %w(screen ncurses-term sysv-rc-conf make nfs-common tree sysklogd
-          sqlite3 libsqlite3-dev sysklogd libxslt1.1 libxslt1-dev gawk)
-
+#packages
 execute "apt-get update" do
   only_if { Time.now - File.mtime("/var/cache/apt/pkgcache.bin") > 3600*6 }
 end
 
-list.each do |pkg|
+%w(screen ncurses-term sysv-rc-conf make nfs-common tree sysklogd sysklogd
+   sqlite3 libsqlite3-dev libxslt1.1 libxslt1-dev gawk).each do |pkg|
   apt_package pkg
+end
+
+#motd
+execute "rm /etc/motd.tail && uname -snrvm > /etc/motd" do
+  only_if { File.exists?("/etc/motd.tail") }
 end
