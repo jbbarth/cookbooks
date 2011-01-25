@@ -19,7 +19,7 @@
 
 #packages
 execute "apt-get update" do
-  only_if { Time.now - File.mtime("/var/cache/apt/pkgcache.bin") > 3600*6 }
+  only_if { Time.now - File.atime("/var/cache/apt/pkgcache.bin") > 3600*6 }
 end
 
 %w(screen ncurses-term sysv-rc-conf make nfs-common tree sysklogd sysklogd
