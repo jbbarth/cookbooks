@@ -29,6 +29,7 @@ end
 
 group "rvm" do
   gid 2001
+  append true
 end
 
 execute "install-rvm-system-wide" do
