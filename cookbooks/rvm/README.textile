@@ -30,3 +30,30 @@ rvm_ruby "uninstall 1.8.6" do
   action  :purge
 end
 </pre>
+
+h2. rvm_gemset
+
+Manage ruby gemsets inside a ruby environment (possibly created with @rvm_ruby@ resource).
+
+h3. Actions
+
+|_. Action|_. Description|_. Default|
+|*create*|Create a gemset|Yes|
+|*delete*|Delete a gemset||
+
+h3. Attributes
+
+|_.Attribute|_.Description|_.Default value|
+|*gemset_name*|_Name attribute_: Name of the gemset|name|
+
+h3. Examples
+
+<pre>
+#creates a gemset named 'shiny_gemset' in the ruby 1.9.2 environment
+rvm_gemset "1.9.2@shiny_gemset"
+
+#then delete it
+rvm_gemset "1.9.2@shiny_gemset" do
+  action :delete
+end
+</pre>
