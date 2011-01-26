@@ -72,10 +72,20 @@ users.each do |u|
     variables :ssh_keys => u['ssh_keys']
   end
 
+  file "#{home_dir}/.ssh/config" do
+    owner u['id']
+    group "admins"
+    mode "0600"
+  end
+
   #dotfiles
-  execute "install-dotfiles-#{u['id']}" do
-    command "cd #{home_dir}; git init; git remote add origin #{u['dotfiles']}; git pull origin master"
+  bash "install-dotfiles-#{u['id']}" do
     user u['id']
+    cwd home_dir
+    code <<-EOH
+      git init
+      git remote add origin #{u['dotfiles']}
+    EOH
     only_if { u['dotfiles'] && !File.exists?(File.join(home_dir,".git")) }
   end
 end
