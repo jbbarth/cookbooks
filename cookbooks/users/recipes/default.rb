@@ -88,6 +88,15 @@ users.each do |u|
     EOH
     only_if { u['dotfiles'] && !File.exists?(File.join(home_dir,".git")) }
   end
+
+  #keep dotfiles synchronized
+  git home_dir do
+    repository u['dotfiles']
+    reference "master"
+    user u['id']
+    only_if { u['dotfiles'] }
+    action :sync
+  end
 end
 
 #if RVM is installed, add admins to RVM group
