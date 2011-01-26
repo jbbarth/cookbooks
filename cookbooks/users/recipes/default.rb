@@ -72,12 +72,6 @@ users.each do |u|
     variables :ssh_keys => u['ssh_keys']
   end
 
-  file "#{home_dir}/.ssh/config" do
-    owner u['id']
-    group "admins"
-    mode "0600"
-  end
-
   #dotfiles
   bash "install-dotfiles-#{u['id']}" do
     user u['id']
@@ -96,6 +90,14 @@ users.each do |u|
     user u['id']
     only_if { u['dotfiles'] }
     action :sync
+  end
+
+  #ensure .ssh/config has the correct modes
+  #even after a git sync
+  file "#{home_dir}/.ssh/config" do
+    owner u['id']
+    group "admins"
+    mode "0600"
   end
 end
 
