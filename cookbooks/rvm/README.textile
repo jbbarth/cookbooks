@@ -6,11 +6,27 @@ h1. Definitions
 
 h2. rvm_ruby
 
-Manage a ruby environment by running @rvm install <version>@ behind the scenes.
+Manage a ruby environment by running @rvm <action> <version>@ behind the scenes.
 
 h3. Actions
 
-|^. Action|^. Description|^. Default|
+|_. Action|_. Description|_. Default|
 |*install*|Install a ruby environment|Yes|
 |*remove*|Remove a ruby environment, keeping sources||
 |*purge*|Remove a ruby environment including sources||
+
+h3. Attributes
+
+|_.Attribute|_.Description|_.Default value|
+|*version*|_Name attribute_: Ruby implementation and version to install/uninstall|name|
+
+h3. Examples
+
+<pre>
+rvm_ruby "1.8.7"
+
+rvm_ruby "uninstall 1.8.6" do
+  version "ruby-1.8.6"
+  action  :purge
+end
+</pre>
