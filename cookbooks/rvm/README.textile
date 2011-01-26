@@ -1,0 +1,3 @@
+h1. Description
+
+This cookbook provides recipes to install and configure "RVM (Ruby Version Manager)":http://rvm.beginrescueend.com/. RVM is installed at system level ("system-wide install").
