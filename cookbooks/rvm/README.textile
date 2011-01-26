@@ -1,3 +1,16 @@
 h1. Description
 
 This cookbook provides recipes to install and configure "RVM (Ruby Version Manager)":http://rvm.beginrescueend.com/. RVM is installed at system level ("system-wide install").
+
+h1. Definitions
+
+h2. rvm_ruby
+
+Manage a ruby environment by running @rvm install <version>@ behind the scenes.
+
+h3. Actions
+
+|^. Action|^. Description|^. Default|
+|*install*|Install a ruby environment|Yes|
+|*remove*|Remove a ruby environment, keeping sources||
+|*purge*|Remove a ruby environment including sources||
