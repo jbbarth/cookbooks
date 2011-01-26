@@ -3,13 +3,16 @@ define :rvm_ruby, :action => :install do
   short_version = params[:version] || params[:name]
   version = %x(rvm strings #{short_version}).chomp
   
+  #search wether specified ruby is available
+  available = %x(rvm list known_strings).split("\n").include?(version)
+
   #search wether specified ruby is installed
   installed = %x(rvm list strings).split("\n").include?(version)
 
   #INSTALL
   if params[:action] == :install
     execute "rvm install #{version}" do
-      only_if { version && !installed }
+      only_if { available && !installed }
     end
   #REMOVE/PURGE
   elsif params[:action] == :remove || params[:action] == :purge
