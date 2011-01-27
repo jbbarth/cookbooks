@@ -38,11 +38,6 @@ cd /var/chef
 git remote|grep origin >/dev/null || git remote add origin git://github.com/jbbarth/cookbooks.git
 git pull origin master
 
-# Opscode cookbooks
-cd /var/chef
-[ -d opscode ] || git clone git://github.com/opscode/cookbooks.git opscode
-cd opscode && git pull origin master
-
 # Define chef configuration (/etc/chef)
 sudo mkdir -p /etc/chef
 sudo chown -R $user:$group /etc/chef
