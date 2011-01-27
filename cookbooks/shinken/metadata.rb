@@ -1,0 +1,5 @@
+maintainer       "Jean-Baptiste Barth"
+maintainer_email "jeanbaptiste.barth@gmail.com"
+license          "Apache 2.0"
+description      "Installs/Configures shinken 0.5.1 manually"
+version          "0.1"
