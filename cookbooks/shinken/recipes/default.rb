@@ -20,6 +20,25 @@
 package "python"
 package "pyro"
 
+if node[:platform] == "debian"
+  if node[:platform_version].match /^5.0/
+    execute "apt-get-update" do
+      command "apt-get update"
+      action :nothing
+    end
+
+    file "/etc/apt/sources.list.d/backports.list" do
+      owner "root"
+      group "root"
+      mode "644"
+      content "deb http://backports.debian.org/debian-backports lenny-backports main"
+      notifies :run, "execute[apt-get-update]", :immediately
+    end
+  end
+
+  package "python-multiprocessing"
+end
+
 version = "shinken-0.5.1"
 tarball = "#{version}.tar.gz"
 
