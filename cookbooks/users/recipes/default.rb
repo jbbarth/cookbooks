@@ -89,6 +89,7 @@ users.each do |u|
     reference "master"
     user u['id']
     only_if { u['dotfiles'] }
+    not_if "cd #{home_dir}; git ls-remote #{u['dotfiles']} master | grep $(git rev-parse HEAD)", :user => u['id']
     action :sync
   end
 
