@@ -93,6 +93,19 @@ users.each do |u|
     action :sync
   end
 
+  #if no dotfiles param, try our default ones
+  if !u['dotfiles']
+    %w(gemrc  psqlrc  screenrc  vimrc  zshrc).each do |file|
+      cookbook_file "#{home_dir}/.#{file}" do
+        source file
+        mode "0644"
+        owner u['id']
+        group "admins"
+        action :create_if_missing
+      end
+    end
+  end
+
   #ensure .ssh/config has the correct modes
   #even after a git sync
   file "#{home_dir}/.ssh/config" do

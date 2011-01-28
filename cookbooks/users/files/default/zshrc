@@ -1,0 +1,50 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.zsh_history
+HISTSIZE=20000
+SAVEHIST=20000
+#bindkey -v
+bindkey '^[[3~' delete-char
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '~/.zshrc'
+#autoload -Uz compinit
+autoload -U compinit
+compinit
+# End of lines added by compinstall
+
+# My own options (see man zshoptions)
+setopt auto_cd
+setopt auto_pushd
+setopt cdable_vars
+CDPATH=$CDPATH:$HOME
+setopt pushd_ignore_dups
+setopt hist_ignore_dups
+setopt inc_append_history
+setopt extended_history
+#setopt path_dirs
+setopt correct
+setopt nonomatch
+setopt extended_glob
+setopt nullglob
+NULLCMD=:
+
+# Shell colors ; adapted from
+# http://chm.duquesne.free.fr/blog/?p=61
+if [ -x /usr/bin/dircolors ]; then
+    eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+    alias less='less -R'
+fi
+
+# Editor = Vi
+export GIT_EDITOR=vi
+export SUDO_EDITOR=vi
+
+# Automatic files handling
+autoload zsh-mime-setup
+zsh-mime-setup 2>/dev/null
