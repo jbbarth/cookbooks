@@ -1,0 +1,6 @@
+maintainer       "Jean-Baptiste Barth"
+maintainer_email "jeanbaptiste.barth@gmail.com"
+license          "Apache 2.0"
+description      "Apt configuration for my debian lenny boxes"
+long_description "Apt configuration for my debian lenny boxes"
+version          "0.1"
