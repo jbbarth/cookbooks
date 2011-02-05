@@ -23,5 +23,6 @@ apt_package "sqlite3" do
   if node[:platform] == "debian"
     version "3.7.3-1*"
     options "-t lenny-backports"
+    not_if "dpkg -l sqlite3|grep 3.7.3-1>/dev/null"
   end
 end
