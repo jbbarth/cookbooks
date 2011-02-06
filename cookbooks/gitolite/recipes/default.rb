@@ -37,6 +37,11 @@ user "git" do
   shell "/bin/bash"
 end
 
+group "git" do
+  members "www-data"
+  append  true
+end
+
 directory "/var/git" do
   owner "git"
   group "admins"
