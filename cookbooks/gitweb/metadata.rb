@@ -1,0 +1,8 @@
+maintainer       "Jean-Baptiste Barth"
+maintainer_email "jeanbaptiste.barth@gmail.com"
+license          "Apache 2.0"
+description      "Installs/Configures gitweb"
+long_description "Installs/Configures gitweb with nginx and kogakure's theme"
+version          "0.1"
+supports         "debian"
+supports         "ubuntu"
