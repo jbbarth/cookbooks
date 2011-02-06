@@ -17,19 +17,14 @@
 # limitations under the License.
 #
 
-# Typical content of a users.json file:
+# Typical content of a users section in chef json config:
 # [
 #   {"id": "jsmith", "uid": 1001, "shell": "/bin/zsh",
 #    "comment": "John Smith,room 2.5,12345677,12345678,comment",
 #    "ssh_keys": "ssh-rsa bla bla bla" },
 #   ...
 # ]
-begin
-  users = JSON.parse(File.read("/etc/chef/users.json"))
-rescue
-  users = []
-  log "Problem loading /etc/chef/users.json: #{$!}"
-end
+users = node[:users]
 
 # Create the admins group
 group "admins" do
