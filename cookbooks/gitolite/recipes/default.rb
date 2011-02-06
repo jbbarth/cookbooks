@@ -44,7 +44,7 @@ end
 
 directory "/var/git" do
   owner "git"
-  group "admins"
+  group "git"
   mode "0755"
 end
 
