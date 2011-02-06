@@ -67,3 +67,13 @@ bash "setup-gitolite" do
   environment vars
   not_if "test -d /var/git/.gitolite"
 end
+
+fcmd = "find /var/git/repositories"
+bash "adapt repositories owners and permissions" do
+  code <<-EOH
+    chown -R git:git /var/git/repositories
+    #{fcmd} -type d -exec chmod ug+rx {} \\;
+    #{fcmd} -type f -exec chmod ug+r  {} \\;
+  EOH
+  only_if "#{fcmd} ! -user git -o ! -group git -o \\( -type d ! -perm -ug+rx \\) -o \\( -type f ! -perm -ug+r \\) |grep g"
+end
