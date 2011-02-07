@@ -46,3 +46,16 @@ end
 execute "nxensite #{domain} && /etc/init.d/nginx reload" do
   not_if "test -h /etc/nginx/sites-enabled/#{domain}"
 end
+
+# kogakure theme
+# https://github.com/kogakure/gitweb-theme
+directory "/usr/share/gitweb/themes/kogakure" do
+  recursive true
+end
+
+%w(gitweb.css gitweb.js).each do |file|
+  template "/usr/share/gitweb/themes/kogakure/#{file}" do
+    source "kogakure-theme/#{file}"
+    mode 644
+  end
+end
