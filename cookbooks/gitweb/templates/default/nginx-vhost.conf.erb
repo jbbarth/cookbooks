@@ -6,6 +6,10 @@ server {
     if (!-f $request_filename) {
       fastcgi_pass   unix:/var/run/fcgiwrap.socket;
     }
+  <% if @htpasswd && File.exists?(@htpasswd) -%>
+    auth_basic "Restricted";
+    auth_basic_user_file <%= @htpasswd %>;
+  <% end -%>
     fastcgi_index  index.cgi;
     fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
     include    fastcgi_params;

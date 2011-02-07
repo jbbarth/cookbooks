@@ -40,7 +40,8 @@ end
 domain = "git.#{node[:domain]}"
 template "/etc/nginx/sites-available/#{domain}" do
   source "nginx-vhost.conf.erb"
-  variables :domain => domain
+  variables({:domain => domain, :htpasswd => node[:gitweb][:htpasswd]})
+  notifies :reload, "service[nginx]"
 end
 
 execute "nxensite #{domain} && /etc/init.d/nginx reload" do
