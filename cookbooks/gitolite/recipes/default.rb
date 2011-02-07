@@ -25,9 +25,11 @@ bash "install-gitolite" do
   code <<-EOH
     git clone git://github.com/sitaramc/gitolite gitolite-source
     cd gitolite-source
-    git checkout -t origin/pu
+    #git checkout -t origin/pu
+    git checkout master
     mkdir -p /usr/local/share/gitolite/conf /usr/local/share/gitolite/hooks
     src/gl-system-install /usr/local/bin /usr/local/share/gitolite/conf /usr/local/share/gitolite/hooks
+    rm -rf gitolite-source
   EOH
   not_if { File.directory?("/usr/local/share/gitolite") }
 end
