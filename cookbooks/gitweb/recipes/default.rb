@@ -54,8 +54,13 @@ directory "/usr/share/gitweb/themes/kogakure" do
 end
 
 %w(gitweb.css gitweb.js).each do |file|
-  template "/usr/share/gitweb/themes/kogakure/#{file}" do
-    source "kogakure-theme/#{file}"
+  remote_file "/usr/share/gitweb/themes/kogakure/#{file}" do
+    source "https://github.com/kogakure/gitweb-theme/raw/master/#{file}"
     mode 644
   end
+  #we kept a copy in our template, just in case...
+  #template "/usr/share/gitweb/themes/kogakure/#{file}" do
+  #  source "kogakure-theme/#{file}"
+  #  mode 644
+  #end
 end
