@@ -75,10 +75,10 @@ bash "setup-gitolite" do
   not_if "test -d /var/git/.gitolite"
 end
 
-fcmd = "find /var/git/repositories"
+fcmd = "find /var/git"
 bash "adapt repositories owners and permissions" do
   code <<-EOH
-    chown -R git:git /var/git/repositories
+    chown -R git:git /var/git
     #{fcmd} -type d -exec chmod ug+rx {} \\;
     #{fcmd} -type f -exec chmod ug+r  {} \\;
   EOH
