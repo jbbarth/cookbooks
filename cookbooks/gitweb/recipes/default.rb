@@ -31,8 +31,12 @@ end
 # see: http://michalbugno.pl/en/blog/gitweb-nginx
 apt_package "fcgiwrap"
 
+is_lenny = node[:platform] == "debian" && node[:platform_version].match(/^5.0/)
+
+include_recipe "apt::squeeze" if is_lenny
+
 service "fcgiwrap" do
-  if node[:platform] == "debian" && node[:platform_version].match(/^5.0/)
+  if is_lenny
     version "1.0-1*"
     options "-t squeeze"
     not_if "dpkg -l fcgiwrap|grep 1.0-1"
