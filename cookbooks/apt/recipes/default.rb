@@ -16,3 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+if node[:platform] == "debian"
+  file "/etc/apt/apt.conf.d" do
+    content %(APT::Default-Release "lenny";)
+    owner "root"
+    group "root"
+    mode "644"
+  end
+end
