@@ -29,18 +29,19 @@ end
 # fcgiwrap allows us to wrap cgi scripts in fcgi
 # so we can run gitweb behing nginx
 # see: http://michalbugno.pl/en/blog/gitweb-nginx
-apt_package "fcgiwrap"
-
 is_lenny = node[:platform] == "debian" && node[:platform_version].match(/^5.0/)
 
 include_recipe "apt::squeeze" if is_lenny
 
-service "fcgiwrap" do
+apt_package "fcgiwrap" do
   if is_lenny
     version "1.0-1*"
     options "-t squeeze"
     not_if "dpkg -l fcgiwrap|grep 1.0-1"
   end
+end
+
+service "fcgiwrap" do
   supports :status => true, :restart => true, :reload => false
   action [:enable, :start]
 end
