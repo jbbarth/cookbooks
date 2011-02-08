@@ -37,9 +37,18 @@ execute "install-rvm-system-wide" do
   not_if "test -s /usr/local/lib/rvm"
 end
 
-file "/etc/profile.d/rvm.sh" do
-  owner "root"
-  group "root"
-  mode  "644"
-  content %(# Dropped off by Chef !\n# Loads RVM (Ruby Version Manager)\nsource /usr/local/lib/rvm\n)
+rvmload = %(# Dropped off by Chef !\n# Loads RVM (Ruby Version Manager)\nsource /usr/local/lib/rvm\n)
+if node[:platform] == "ubuntu"
+  file "/etc/profile.d/rvm.sh" do
+    owner "root"
+    group "root"
+    mode  "644"
+    content rvmload
+  end
+elsif node[:platform] == "debian"
+  #debian lenny doesn't have support for /etc/profile.d/
+  execute "add rvm load to /etc/profile" do
+    command %(echo -e "#{rvmload}" >> /etc/profile)
+    not_if "grep 'Loads RVM' /etc/profile"
+  end
 end
