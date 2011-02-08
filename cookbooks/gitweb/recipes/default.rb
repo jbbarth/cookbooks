@@ -32,6 +32,11 @@ end
 apt_package "fcgiwrap"
 
 service "fcgiwrap" do
+  if node[:platform] == "debian" && node[:platform_version].match(/^5.0/)
+    version "1.0-1*"
+    options "-t squeeze"
+    not_if "dpkg -l fcgiwrap|grep 1.0-1"
+  end
   supports :status => true, :restart => true, :reload => false
   action [:enable, :start]
 end
