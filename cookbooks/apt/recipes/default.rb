@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-if node[:platform] == "debian"
+if node[:platform] == "debian" && node[:platform_version].match(/^5.0/)
   file "/etc/apt/apt.conf.d" do
     content %(APT::Default-Release "lenny";)
     owner "root"
