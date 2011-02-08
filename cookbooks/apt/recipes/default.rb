@@ -18,7 +18,7 @@
 #
 
 if node[:platform] == "debian" && node[:platform_version].match(/^5.0/)
-  file "/etc/apt/apt.conf.d" do
+  file "/etc/apt/apt.conf.d/20stay-on-lenny" do
     content %(APT::Default-Release "lenny";)
     owner "root"
     group "root"
