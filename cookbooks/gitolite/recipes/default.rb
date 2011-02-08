@@ -57,8 +57,11 @@ template "/var/git/.gitolite.rc" do
   mode   "0664"
 end
 
-file "/tmp/gitolite-admin.pub" do
-  content node[:users].detect{|u| u['id'] == node[:gitolite][:admin]}[:ssh_keys]
+user = node[:users].detect{|u| u['id'] == node[:gitolite][:admin]}
+admin, sshkey = user[:id], user[:ssh_keys]
+
+file "/tmp/#{admin}.pub" do
+  content sshkey
   owner   "git"
   mode    "0600"
   not_if "test -d /var/git/.gitolite"
@@ -67,8 +70,8 @@ end
 bash "setup-gitolite" do
   user "git"
   code <<-EOH
-    gl-setup /tmp/gitolite-admin.pub
-    rm /tmp/gitolite-admin.pub
+    gl-setup /tmp/#{admin}.pub
+    rm /tmp/#{admin}.pub
   EOH
   vars = {"HOME" => "/var/git"}
   environment vars
