@@ -19,6 +19,11 @@
 package "lsb-release"
 
 codename = node[:lsb][:codename]
+if !codename && node[:platform] == "debian"
+  #/etc/lsb-release is not present on some debian boxes..
+  codename = %x(lsb-release -c|cut -f 2).strip
+end
+
 vbox_apt_file = "/etc/apt/sources.list.d/virtualbox.list"
 
 bash "add-virtualbox-repository" do
