@@ -26,7 +26,7 @@ bash "add-virtualbox-repository" do
     echo "deb http://download.virtualbox.org/virtualbox/debian #{codename} contrib" > #{vbox_apt_file}
     aptitude update
   EOH
-  only_if { !File.exists(vbox_apt_file) && codename }
+  only_if { !File.exists?(vbox_apt_file) && codename }
 end
 
 package "virtualbox-4.0"
