@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+package "lsb-release"
 
 codename = node[:lsb][:codename]
 vbox_apt_file = "/etc/apt/sources.list.d/virtualbox.list"
