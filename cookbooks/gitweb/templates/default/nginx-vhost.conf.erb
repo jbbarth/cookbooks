@@ -1,6 +1,7 @@
 server {
   listen 80;
   server_name <%= @domain %>;
+  access_log  /var/log/nginx/<%= @domain %>.access.log;
   location / {
     root /usr/share/gitweb;
     if (!-f $request_filename) {
