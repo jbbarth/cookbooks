@@ -56,6 +56,10 @@ link "/usr/local/shinken" do
   to "/opt/#{version}"
 end
 
+link "/etc/shinken" do
+  to "/opt/#{version}/etc"
+end
+
 template "/usr/local/shinken/etc/shinken-specific.cfg" do
   source "shinken-specific.cfg.erb"
   owner "shinken"
