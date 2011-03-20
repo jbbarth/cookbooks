@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-node[:user] ||= "salvor"
+node[:user] ||= "jbbarth"
 
 #apt packages
 list = %w(mplayer gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly ibam cryptsetup
