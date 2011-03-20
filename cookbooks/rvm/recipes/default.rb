@@ -33,7 +33,7 @@ group "rvm" do
 end
 
 execute "install-rvm-system-wide" do
-  command "bash < <( curl -L http://bit.ly/rvm-install-system-wide )"
+  command "curl -L http://bit.ly/rvm-install-system-wide > /tmp/rvm; bash /tmp/rvm; rm /tmp/rvm"
   not_if "test -s /usr/local/lib/rvm"
 end
 
