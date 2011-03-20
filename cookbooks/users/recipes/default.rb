@@ -31,6 +31,9 @@ group "admins" do
   gid 2000
 end
 
+# For dotfiles
+package "git"
+
 # Let's iterate over users
 users.each do |u|
   home_dir = "/home/#{u['id']}"
