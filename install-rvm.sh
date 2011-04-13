@@ -17,7 +17,7 @@ aptitude install -y build-essential bison openssl libreadline5 libreadline5-dev 
 groupadd -f -g 2001 rvm
 
 # install RVM
-bash < <( curl -L http://bit.ly/rvm-install-system-wide )
+bash < <( curl -s https://rvm.beginrescueend.com/install/rvm )
 
 if ! grep "# RVM" /root/.bashrc >/dev/null; then
   echo -e "\n# RVM\nsource /usr/local/lib/rvm" >> /root/.bashrc
