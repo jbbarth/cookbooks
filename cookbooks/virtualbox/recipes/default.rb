@@ -19,7 +19,7 @@
 package "lsb-release"
 
 codename = node[:lsb][:codename]
-if !codename && node[:platform] == "debian"
+if codename.to_s.match(/^\s*$/) && node[:platform] == "debian"
   #/etc/lsb-release is not present on some debian boxes..
   codename = %x(lsb_release -c|cut -f 2).strip
 end

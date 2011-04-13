@@ -30,6 +30,7 @@ version = "shinken-0.5.1"
 tarball = "#{version}.tar.gz"
 
 group "shinken" do
+  gid 2002
   members node[:users].map{|u| u['id']}
 end
 

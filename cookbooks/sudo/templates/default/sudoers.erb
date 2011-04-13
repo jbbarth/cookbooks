@@ -16,5 +16,10 @@ Defaults  env_reset
 # User privilege specification
 root  ALL=(ALL) ALL
 
+<% if File.exists?("/vagrant") -%>
+# Vagrant user
+vagrant ALL=(ALL) NOPASSWD:ALL
+<% end -%>
+
 # System administrators
 %admins ALL=(ALL) ALL
