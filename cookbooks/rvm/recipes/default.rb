@@ -37,7 +37,7 @@ execute "install-rvm-system-wide" do
   not_if "test -s /usr/local/lib/rvm"
 end
 
-rvmload = %(# Dropped off by Chef !\n# Loads RVM (Ruby Version Manager)\nsource /usr/local/lib/rvm\n)
+rvmload = %(# Dropped off by Chef !\n# Loads RVM (Ruby Version Manager)\nsource /usr/local/rvm/scripts/rvm\n)
 if node[:platform] == "ubuntu"
   file "/etc/profile.d/rvm.sh" do
     owner "root"
