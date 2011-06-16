@@ -5,7 +5,7 @@ if [ "$(id -u)" != 0 ]; then
   exit 1
 fi
 
-if [ -s "/usr/local/lib/rvm" ]; then
+if [ -s "/usr/local/rvm/lib/rvm" ]; then
   echo "RVM already installed, quiting..."
   exit
 fi
@@ -20,11 +20,11 @@ groupadd -f -g 2001 rvm
 bash < <( curl -s https://rvm.beginrescueend.com/install/rvm )
 
 if ! grep "# RVM" /root/.bashrc >/dev/null; then
-  echo -e "\n# RVM\nsource /usr/local/lib/rvm" >> /root/.bashrc
+  echo -e "\n# RVM\nsource /usr/local/rvm/lib/rvm" >> /root/.bashrc
   source /root/.bashrc
 fi
 
 if ! grep "# RVM" /etc/skel/.bashrc >/dev/null; then
   sed -i 's/^.*PS1.*return$/if [[ -n "$PS1" ]]; then/' /etc/skel/.bashrc
-  echo -e "\nfi #endof Interactive test\n# RVM\nsource /usr/local/lib/rvm" >> /etc/skel/.bashrc
+  echo -e "\nfi #endof Interactive test\n# RVM\nsource /usr/local/rvm/lib/rvm" >> /etc/skel/.bashrc
 fi
