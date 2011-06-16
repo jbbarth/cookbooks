@@ -34,7 +34,7 @@ end
 
 execute "install-rvm-system-wide" do
   command "curl -L http://bit.ly/rvm-install-system-wide > /tmp/rvm; bash /tmp/rvm; rm /tmp/rvm"
-  not_if "test -s /usr/local/lib/rvm"
+  not_if "test -s /usr/local/rvm"
 end
 
 rvmload = %(# Dropped off by Chef !\n# Loads RVM (Ruby Version Manager)\nsource /usr/local/rvm/scripts/rvm\n)
