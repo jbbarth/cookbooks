@@ -50,9 +50,8 @@ deploy app_dir do
   revision          app_rev
   user              "www-data"
   before_migrate do
-    current_release = release_path
     bash "install the gemset" do
-      cwd current_release
+      cwd release_path
       code <<-EOF
         source '/usr/local/rvm/scripts/rvm'
         rvm #{app_rvm} --create
