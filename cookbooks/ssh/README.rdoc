@@ -1,0 +1,1 @@
+Chef cookbook for ssh. Find me at http://github.com/jbbarth/cookbooks

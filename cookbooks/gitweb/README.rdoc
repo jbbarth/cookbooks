@@ -1,0 +1,1 @@
+Chef cookbook for gitweb. Find me at http://github.com/jbbarth/cookbooks
