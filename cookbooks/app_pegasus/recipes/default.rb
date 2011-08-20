@@ -22,6 +22,7 @@ app_dir  = "/apps/#{app_url}"
 app_rvm  = "1.9.2@#{app_url}"
 app_repo = "/home/jbbarth/dev/cic.git"
 app_rev  = "HEAD"
+app_user = "www-data"
 
 #TODO: move it in a general recipe
 directory "/apps" do
@@ -32,7 +33,7 @@ end
 
 %w(. shared shared/config shared/log shared/pids shared/system).each do |dir|
   directory "#{app_dir}/#{dir}" do
-    owner "www-data"
+    owner app_user
     group "admins"
     mode  "2755"
   end
@@ -48,7 +49,7 @@ end
 deploy app_dir do
   repo              app_repo
   revision          app_rev
-  user              "www-data"
+  user              app_user
   before_migrate do
     bash "install the gemset" do
       cwd release_path
@@ -70,7 +71,7 @@ deploy app_dir do
       cwd release_path
       code <<-EOF
         cp /opt/shinken-0.5.1/var/status.dat #{app_dir}/current/data/system/status.dat
-        chown #{user} #{app_dir}/current/data/system/status.dat
+        chown #{app_user} #{app_dir}/current/data/system/status.dat
       EOF
     end
   end
