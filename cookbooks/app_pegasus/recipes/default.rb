@@ -65,4 +65,13 @@ deploy app_dir do
   shallow_clone     true
   action            :deploy
   restart_command   "/etc/init.d/app_#{app_url} restart"
+  before_restart do
+    bash "copy status.dat file" do
+      cwd release_path
+      code <<-EOF
+        cp /opt/shinken-0.5.1/var/status.dat #{app_dir}/current/data/system/status.dat
+        chown #{user} #{app_dir}/current/data/system/status.dat
+      EOF
+    end
+  end
 end
