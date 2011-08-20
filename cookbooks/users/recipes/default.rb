@@ -29,6 +29,7 @@ users = node[:users]
 # Create the admins group
 group "admins" do
   gid 2000
+  not_if "getent group | grep admins:x:2000"
 end
 
 # For dotfiles
