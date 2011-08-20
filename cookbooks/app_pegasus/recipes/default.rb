@@ -17,6 +17,11 @@
 # limitations under the License.
 #
 
+app_url  = "pegasus.jbbarth.com"
+app_dir  = "/apps/#{app_url}"
+app_rvm  = "1.9.2@#{app_url}"
+app_repo = "/home/jbbarth/dev/cic.git"
+app_rev  = "HEAD"
 
 #TODO: move it in a general recipe
 directory "/apps" do
@@ -26,23 +31,23 @@ directory "/apps" do
 end
 
 %w(. shared shared/config shared/log shared/pids shared/system).each do |dir|
-  directory "/apps/pegasus.jbbarth.com/#{dir}" do
+  directory "#{app_dir}/#{dir}" do
     owner "www-data"
     group "admins"
     mode  "2755"
   end
 end
 
-file "/apps/pegasus.jbbarth.com/shared/config/database.yml" do
+file "#{app_dir}/shared/config/database.yml" do
   content ""
   not_if { File.exists?(path) }
 end
 
 
 #the deploy resource
-deploy "/apps/pegasus.jbbarth.com" do
-  repo              "/home/jbbarth/dev/cic.git"
-  revision          "HEAD"
+deploy app_dir do
+  repo              app_repo
+  revision          app_rev
   user              "www-data"
   before_migrate do
     current_release = release_path
@@ -50,15 +55,15 @@ deploy "/apps/pegasus.jbbarth.com" do
       cwd current_release
       code <<-EOF
         source '/usr/local/rvm/scripts/rvm'
-        rvm 1.9.2@pegasus.jbbarth.com --create
+        rvm #{app_rvm} --create
         bundle check || bundle
       EOF
     end
   end
   migrate           false
-  #migration_command %(bash -c "source '/usr/local/rvm/scripts/rvm'; rvm 1.9.2@pegasus.jbbarth.com; rake db:migrate")
+  #migration_command %(bash -c "source '/usr/local/rvm/scripts/rvm'; rvm #{app_rvm}; rake db:migrate")
   environment       "RAILS_ENV" => "production"
   shallow_clone     true
   action            :deploy
-  restart_command   "/etc/init.d/app_pegasus.jbbarth.com restart"
+  restart_command   "/etc/init.d/app_#{app_url} restart"
 end
