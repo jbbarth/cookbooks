@@ -25,13 +25,10 @@ app_rev  = "HEAD"
 app_user = "www-data"
 app_port = 3001
 
-#TODO: move it in a general recipe
-directory "/apps" do
-  owner "www-data"
-  group "admins"
-  mode  "2755"
-end
+#dependencies
+include_recipe "apps"
 
+#shared directories
 %w(. shared shared/config shared/log shared/pids shared/system).each do |dir|
   directory "#{app_dir}/#{dir}" do
     owner app_user
@@ -40,6 +37,7 @@ end
   end
 end
 
+#shared files
 file "#{app_dir}/shared/config/database.yml" do
   content ""
   not_if { File.exists?(path) }
@@ -58,6 +56,17 @@ template "/etc/init.d/app_#{app_url}" do
     :app_port => app_port
   )
 end
+
+#vhost
+template "/etc/nginx/sites-available/#{app_url}" do
+  source "nginx_vhost.erb"
+  variables(
+    :app_url => app_url,
+    :app_port => app_port
+  )
+end
+#enables the vhost
+nginx_site app_url
 
 #the deploy resource
 deploy_revision app_dir do
