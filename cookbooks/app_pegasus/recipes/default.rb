@@ -60,6 +60,7 @@ end
 #vhost
 template "/etc/nginx/sites-available/#{app_url}" do
   source "nginx_vhost.erb"
+  mode   "0644"
   variables(
     :app_url => app_url,
     :app_port => app_port
