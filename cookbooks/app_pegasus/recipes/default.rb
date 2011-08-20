@@ -60,7 +60,7 @@ template "/etc/init.d/app_#{app_url}" do
 end
 
 #the deploy resource
-deploy app_dir do
+deploy_revision app_dir do
   repo              app_repo
   revision          app_rev
   user              app_user
