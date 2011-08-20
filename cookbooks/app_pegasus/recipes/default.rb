@@ -50,7 +50,7 @@ template "/etc/init.d/app_#{app_url}" do
   source "init_script.erb"
   owner "root"
   group "admins"
-  mode  775
+  mode  "0775"
   variables(
     :app_url => app_url,
     :app_dir => app_dir,
