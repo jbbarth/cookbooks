@@ -25,7 +25,7 @@ directory "/apps" do
   mode  "2755"
 end
 
-%w(. shared shared/config shared/log).each do |dir|
+%w(. shared shared/config shared/log shared/pids shared/system).each do |dir|
   directory "/apps/pegasus.jbbarth.com/#{dir}" do
     owner "www-data"
     group "admins"
