@@ -23,6 +23,7 @@ app_rvm  = "1.9.2@#{app_url}"
 app_repo = "/home/jbbarth/dev/cic.git"
 app_rev  = "HEAD"
 app_user = "www-data"
+app_port = 3001
 
 #TODO: move it in a general recipe
 directory "/apps" do
@@ -44,6 +45,19 @@ file "#{app_dir}/shared/config/database.yml" do
   not_if { File.exists?(path) }
 end
 
+#startup script
+template "/etc/init.d/app_#{app_url}" do
+  source "init_script.erb"
+  owner "root"
+  group "admins"
+  mode  775
+  variables(
+    :app_url => app_url,
+    :app_dir => app_dir,
+    :app_rvm => app_rvm,
+    :app_port => app_port
+  )
+end
 
 #the deploy resource
 deploy app_dir do
