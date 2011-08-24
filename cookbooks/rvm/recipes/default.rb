@@ -47,8 +47,10 @@ if node[:platform] == "ubuntu"
   end
 elsif node[:platform] == "debian"
   #debian lenny doesn't have support for /etc/profile.d/
-  execute "add rvm load to /etc/profile" do
-    command %(echo -e "#{rvmload}" >> /etc/profile)
+  bash "add rvm load to /etc/profile" do
+    code <<-EOF
+      echo -e "#{rvmload}" >> /etc/profile
+    EOF
     not_if "grep 'Loads RVM' /etc/profile"
   end
 end
