@@ -29,7 +29,7 @@ app_port = 3005
 include_recipe "apps"
 
 #shared directories
-["", "shared", "shared/config", "shared/db", "shared/log", "shared/pids", "shared/system"].each do |dir|
+["", "shared", "shared/config", "shared/db", "shared/log", "shared/pids", "shared/system", "shared/solr", "shared/solr/data"].each do |dir|
   directory "#{app_dir}/#{dir}" do
     owner app_user
     group "admins"
@@ -101,7 +101,8 @@ deploy_revision app_dir do
   end
   symlink_before_migrate "config/database.yml" => "config/database.yml",
                          "config/sunspot.yml"  => "config/sunspot.yml",
-                         "db/forteresses.sqlite3" => "db/forteresses.sqlite3"
+                         "db/forteresses.sqlite3" => "db/forteresses.sqlite3",
+                         "solr/data" => "solr/data"
   migrate           true
   migration_command %(bash -c "source '/usr/local/rvm/scripts/rvm'; rvm #{app_rvm}; rake db:migrate db:seed")
   environment       "RAILS_ENV" => "production"
