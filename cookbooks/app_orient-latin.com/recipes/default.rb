@@ -61,22 +61,23 @@ template "/etc/init.d/app_#{app_url}" do
   owner "root"
   group "admins"
   mode  "0775"
-  variables(
-    :app_url => app_url,
-    :app_dir => app_dir,
-    :app_rvm => app_rvm,
-    :app_port => app_port
-  )
+  variables(:app_url => app_url, :app_dir => app_dir, :app_rvm => app_rvm, :app_port => app_port)
+end
+
+#startup script for solr
+template "/etc/init.d/solr_#{app_url}" do
+  source "init_solr.erb"
+  owner "root"
+  group "admins"
+  mode  "0775"
+  variables(:app_url => app_url, :app_dir => app_dir, :app_rvm => app_rvm)
 end
 
 #vhost
 template "/etc/nginx/sites-available/#{app_url}" do
   source "nginx_vhost.erb"
   mode   "0644"
-  variables(
-    :app_url => app_url,
-    :app_port => app_port
-  )
+  variables(:app_url => app_url, :app_port => app_port)
 end
 #enables the vhost
 nginx_site app_url
@@ -107,19 +108,7 @@ deploy_revision app_dir do
   shallow_clone     true
   action            :deploy
   restart_command   "/etc/init.d/app_#{app_url} restart"
-end
-
-#startup script for solr
-template "/etc/init.d/solr_#{app_url}" do
-  source "init_solr.erb"
-  owner "root"
-  group "admins"
-  mode  "0775"
-  variables(
-    :app_url => app_url,
-    :app_dir => app_dir,
-    :app_rvm => app_rvm,
-  )
+  notifies :restart, "service[solr_#{app_url}]"
 end
 
 #start solr service if needed
