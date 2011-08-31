@@ -38,7 +38,7 @@ stop() {
 
 reindex() {
   if running >/dev/null; then
-    RAILS_ENV=$environment rake sunspot:solr:reindex
+    RAILS_ENV=$environment rake sunspot:reindex
   else
     echo "Solr is not running..."
   fi
