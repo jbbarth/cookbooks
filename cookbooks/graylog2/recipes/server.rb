@@ -85,3 +85,10 @@ service "graylog2" do
   supports :restart => true
   action [:enable, :start]
 end
+
+# Rsyslog conf for localhost
+template "/etc/rsyslog.d/10-graylog2.conf" do
+  source "10-graylog2.conf.erb"
+  mode 0644
+  notifies :restart, resources(:service => "rsyslog"), :delayed
+end
