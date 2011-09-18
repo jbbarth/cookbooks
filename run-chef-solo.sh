@@ -7,4 +7,5 @@ if [ "$remoterev" != "$localrev" ]; then
   git pull origin master 2>&1 | sed 's/^/COOKBOOKS UPDATE: /'
 fi
 rvm 1.9.2@chef
-chef-solo $* |grep -v -e "INFO: Processing" -e "INFO: Run List" -e "INFO: Setting the run_list"
+chef-solo $* |fgrep -v -e "INFO: Processing" -e "INFO: Run List" -e "INFO: Setting the run_list" \
+                       -e "Gem::SourceIndex#search"
