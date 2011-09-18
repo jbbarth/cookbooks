@@ -1,7 +1,7 @@
 default.graylog2.basedir = "/opt/graylog2"
 default.graylog2.server.version = "0.9.5p1"
 default.graylog2.web_interface.version = "0.9.5p2"
-default.graylog2.port = 514
+default.graylog2.port = 10514
 default.graylog2.mongodb.host = "localhost"
 default.graylog2.mongodb.port = 27017
 default.graylog2.mongodb.max_connections = 500
