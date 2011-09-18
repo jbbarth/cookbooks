@@ -17,11 +17,12 @@
 # limitations under the License.
 #
 
-e = execute "apt-get update" do
-  action :nothing
-end
-
-e.run_action(:run)
+# There's already something in the 'apt-policy' cookbook
+#
+#e = execute "apt-get update" do
+#  action :nothing
+#end
+#e.run_action(:run)
 
 %w{/var/cache/local /var/cache/local/preseeding}.each do |dirname|
   directory dirname do
