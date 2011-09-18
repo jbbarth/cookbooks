@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd <%= node['logstash']['install_path'] %>
+exec 2>&1
+exec chpst -u nobody java -jar logstash-monolithic.jar web
