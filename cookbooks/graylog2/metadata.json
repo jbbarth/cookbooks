@@ -1,0 +1,33 @@
+{
+  "dependencies": {
+    "apt": ">= 0.0.0",
+    "apache2": ">= 0.0.0"
+  },
+  "name": "graylog2",
+  "maintainer_email": "cloudteam@mdsol.com",
+  "attributes": {
+  },
+  "license": "Apache 2.0",
+  "suggestions": {
+  },
+  "platforms": {
+    "ubuntu": ">= 0.0.0"
+  },
+  "maintainer": "Medidata Solutions Inc.",
+  "long_description": "",
+  "version": "0.0.5",
+  "recommendations": {
+  },
+  "recipes": {
+    "graylog2": "Installs and configures Graylog2"
+  },
+  "groupings": {
+  },
+  "conflicting": {
+  },
+  "replacing": {
+  },
+  "description": "Installs and configures Graylog2",
+  "providing": {
+  }
+}
