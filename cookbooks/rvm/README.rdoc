@@ -1,1 +1,0 @@
-Chef cookbook for rvm. Find me at http://github.com/jbbarth/cookbooks
