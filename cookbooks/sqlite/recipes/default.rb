@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "apt::lenny-backports" if node[:platform] == "debian"
+include_recipe "apt-policy::lenny-backports" if node[:platform] == "debian"
 
 apt_package "sqlite3" do
   if node[:platform] == "debian"

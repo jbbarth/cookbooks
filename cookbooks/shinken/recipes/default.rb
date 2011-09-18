@@ -22,7 +22,7 @@ package "python"
 package "pyro"
 
 if node[:platform] == "debian"
-  include_recipe "apt::lenny-backports" if node[:platform_version].match(/^5.0/)
+  include_recipe "apt-policy::lenny-backports" if node[:platform_version].match(/^5.0/)
   package "python-multiprocessing"
 end
 

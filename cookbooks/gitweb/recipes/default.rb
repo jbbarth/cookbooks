@@ -31,7 +31,7 @@ end
 # see: http://michalbugno.pl/en/blog/gitweb-nginx
 is_lenny = node[:platform] == "debian" && node[:platform_version].match(/^5.0/)
 
-include_recipe "apt::squeeze" if is_lenny
+include_recipe "apt-policy::squeeze" if is_lenny
 
 apt_package "fcgiwrap" do
   if is_lenny
