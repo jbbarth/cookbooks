@@ -22,7 +22,7 @@ execute "apt-get update" do
   only_if { Time.now - File.atime("/var/cache/apt/pkgcache.bin") > 3600*6 }
 end
 
-%w(screen ncurses-term sysv-rc-conf make nfs-common tree vim
+%w(screen ncurses-term sysv-rc-conf make nfs-common tree vim iftop
    sqlite3 libsqlite3-dev libxslt1.1 libxslt1-dev gawk finger).each do |pkg|
   apt_package pkg
 end
