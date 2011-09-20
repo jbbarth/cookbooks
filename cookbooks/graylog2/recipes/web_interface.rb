@@ -143,3 +143,12 @@ service "graylog2-web" do
   supports :restart => true
   action [:enable, :start]
 end
+
+# Cron tasks
+template "/etc/cron.d/graylog2" do
+  source "graylog2.cron.erb"
+  owner "root"
+  group "root"
+  mode 0644
+  variables(:app_dir => "#{node[:graylog2][:basedir]}/web")
+end
