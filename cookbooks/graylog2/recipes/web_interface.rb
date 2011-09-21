@@ -103,13 +103,13 @@ end
 cron "Graylog2 send stream alarms" do
   minute node[:graylog2][:stream_alarms_cron_minute]
   action node[:graylog2][:send_stream_alarms] ? :create : :delete
-  command "source '/usr/local/rvm/scripts/rvm' && cd #{node[:graylog2][:basedir]}/web && RAILS_ENV=production bundle exec rake streamalarms:send"
+  command "bash -c 'source /usr/local/rvm/scripts/rvm && cd #{node[:graylog2][:basedir]}/web && RAILS_ENV=production bundle exec rake streamalarms:send'"
 end
 
 cron "Graylog2 send stream subscriptions" do
   minute node[:graylog2][:stream_subscriptions_cron_minute]
   action node[:graylog2][:send_stream_subscriptions] ? :create : :delete
-  command "source '/usr/local/rvm/scripts/rvm' && cd #{node[:graylog2][:basedir]}/web && RAILS_ENV=production bundle exec rake subscriptions:send"
+  command "bash -c 'source /usr/local/rvm/scripts/rvm && cd #{node[:graylog2][:basedir]}/web && RAILS_ENV=production bundle exec rake subscriptions:send'"
 end
 
 #startup script
@@ -142,20 +142,4 @@ nginx_site "log.jbbarth.com"
 service "graylog2-web" do
   supports :restart => true
   action [:enable, :start]
-end
-
-# Cron tasks
-template "#{node[:graylog2][:basedir]}/web/rake_tasks.sh" do
-  source "graylog2.tasks.erb"
-  owner "root"
-  group "root"
-  mode 0755
-end
-
-template "/etc/cron.d/graylog2" do
-  source "graylog2.cron.erb"
-  owner "root"
-  group "root"
-  mode 0644
-  variables(:app_dir => "#{node[:graylog2][:basedir]}/web")
 end
