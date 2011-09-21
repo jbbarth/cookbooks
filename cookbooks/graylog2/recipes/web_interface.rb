@@ -145,6 +145,13 @@ service "graylog2-web" do
 end
 
 # Cron tasks
+template "#{node[:graylog2][:basedir]}/web/rake_tasks.sh" do
+  source "graylog2.tasks.erb"
+  owner "root"
+  group "root"
+  mode 0755
+end
+
 template "/etc/cron.d/graylog2" do
   source "graylog2.cron.erb"
   owner "root"
