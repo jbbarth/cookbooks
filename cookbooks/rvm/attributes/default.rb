@@ -42,7 +42,7 @@ default['rvm']['gems']      = Hash.new
 default['rvm']['user_gems'] = Hash.new
 
 # hash of rvmrc options
-default['rvm']['rvmrc']         = Hash.new
+default['rvm']['rvmrc']     = {"rvm_trust_rvmrcs_flag" => 1}
 
 # a list of user hashes, each an isolated per-user RVM installation
 default['rvm']['user_installs'] = []
