@@ -117,3 +117,10 @@ service "solr_#{app_url}" do
   supports :status => true, :restart => true
   action [ :enable, :start ]
 end
+
+#perm/rights on shared/db/*
+file "#{app_dir}/shared/db/forteresses.sqlite3" do
+  owner "nobody"
+  group "admins"
+  mode  "664"
+end
