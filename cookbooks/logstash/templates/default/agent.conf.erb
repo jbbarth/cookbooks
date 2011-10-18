@@ -2,42 +2,23 @@
 # - http://logstash.net/docs/1.0.14/getting-started-simple
 
 input {
-  #file {
-  #  type => "linux-syslog"
-  #  path => [ "/var/log/*.log", "/var/log/messages", "/var/log/syslog" ]
-  #}
-
-  #file {
-  #  type => "apache-access"
-  #  path => "/var/log/apache2/access.log"
-  #}
-
-  #file {
-  #  type => "apache-error"
-  #  path => "/var/log/apache2/error.log"
-  #}
+  file {
+    type => "linux-syslog"
+    path => [ "/var/log/*.log", "/var/log/messages", "/var/log/syslog" ]
+  }
 
   file {
-    type => "rails-log"
-  #  path => "/apps/*/current/log/production.log"
-    path => "/apps/orient-latin.com/current/log/production.log"
+    type => "apache-access"
+    path => "/var/log/apache2/access.log"
   }
-}
 
-filter {
-  multiline {
-    type => "rails-log"
-    pattern => "^$"
-    negate => "true"
-    what => next
+  file {
+    type => "apache-error"
+    path => "/var/log/apache2/error.log"
   }
 }
 
 output {
-  gelf {
-    host => "localhost"
-  }
-
   # Emit events to stdout for easy debugging of what is going through
   # logstash.
   stdout { }
