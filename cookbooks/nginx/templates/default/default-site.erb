@@ -6,7 +6,7 @@ server {
   error_log   <%= node[:nginx][:log_dir] %>/localhost.error.log;
 
   location / {
-    root   /var/www/nginx-default;
+    root   /var/www;
     index  index.html index.htm;
   }
 }
