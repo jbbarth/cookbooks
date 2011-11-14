@@ -13,3 +13,4 @@ default[:graphite][:whisper][:checksum] = "66c05eafe8d86167909262dddc96c0bbfde19
 default[:graphite][:graphite_web][:version] = "0.9.9"
 default[:graphite][:graphite_web][:uri] = "http://launchpadlibrarian.net/82112308/graphite-web-0.9.9.tar.gz"
 default[:graphite][:graphite_web][:checksum] = "cc78bab7fb26b341a62bbc0360d675147d77cea3075eae16c65db3b63f502419"
+default[:graphite][:graphite_web][:public_url] = "graph.jbbarth.com"

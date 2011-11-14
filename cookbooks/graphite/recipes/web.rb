@@ -42,8 +42,15 @@ end
 apache_site "000-default" do
   enable false
 end
-
 apache_site "graphite"
+
+app_url = node.graphite.graphite_web.public_url
+template "/etc/nginx/sites-available/#{app_url}" do
+  source "nginx_vhost.erb"
+  mode   "0644"
+  variables(:app_url => app_url, :app_port => 81)
+end
+nginx_site app_url
 
 directory "/opt/graphite/storage/log/webapp" do
   owner "www-data"
