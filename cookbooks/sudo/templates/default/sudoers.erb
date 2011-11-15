@@ -16,10 +16,15 @@ Defaults  env_reset
 # User privilege specification
 root  ALL=(ALL) ALL
 
+# System administrators
+%admins ALL=(ALL) ALL
+
 <% if File.exists?("/vagrant") -%>
 # Vagrant user
 vagrant ALL=(ALL) NOPASSWD:ALL
 <% end -%>
 
-# System administrators
-%admins ALL=(ALL) ALL
+<% if @hostname == "raptor" -%>
+# No passwd for me on my own laptop
+jbbarth ALL=(ALL) NOPASSWD: ALL
+<% end -%>
