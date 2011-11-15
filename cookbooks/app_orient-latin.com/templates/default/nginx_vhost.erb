@@ -1,12 +1,36 @@
 server {
   listen   80;
-  server_name <%= @app_url %>;
+  server_name <%= @app_servername %>;
+
+  if ($args ~ site=(.+)) {
+    set $site $1;
+    rewrite ^/site\.php  /fortresses/$site?  redirect;
+    break;
+  }
+  #if ($args ~ var=country&val=ISR) {
+  #  rewrite ^/liste\.php   /fortresses?by_country=ISRcountry_code redirect;
+  #  break;
+  #}
+  #if ($args ~ var=id_etat&val=JER) {
+  #  rewrite ^/liste\.php   /fortresses?by_state=state_code     redirect;
+  #  break;
+  #}
+  rewrite ^/*test(/?)                       /           redirect;
+  rewrite ^/*test(/.*)                      $1;
+  rewrite ^/index\.php                      /           redirect;
+  rewrite ^/accueil\.php                    /           redirect;
+  rewrite ^/biblio\.php                     /sources    redirect;
+  rewrite ^/contact\.php                    /contact    redirect;
+  rewrite ^/plan\.php                       /plan       redirect;
+  rewrite ^/site_accueil\.php               /contact    redirect;
+  rewrite ^/actus_liste\.php                /news       redirect;
+  rewrite ^/liste\.php                      /fortresses redirect;
+  rewrite ^/site\.php                       /fortresses redirect;
+  rewrite ^/php/genatom\.php                /feed       redirect;
 
   access_log  /var/log/nginx/<%= @app_url %>.access.log;
 
   location / {
-    auth_basic            "Restricted";
-    auth_basic_user_file  /etc/nginx/htpasswd;
     proxy_pass        http://localhost:<%= @app_port %>;
   }
 }

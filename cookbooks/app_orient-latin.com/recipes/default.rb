@@ -18,6 +18,7 @@
 #
 
 app_url  = "orient-latin.com"
+app_servername = "www.orient-latin.com orient-latin.com forteresses.jbbarth.com"
 app_dir  = "/apps/#{app_url}"
 app_rvm  = "1.9.2@#{app_url}"
 app_repo = "/home/mgoepp/orient-latin.git"
@@ -77,7 +78,7 @@ end
 template "/etc/nginx/sites-available/#{app_url}" do
   source "nginx_vhost.erb"
   mode   "0644"
-  variables(:app_url => app_url, :app_port => app_port)
+  variables(:app_url => app_url, :app_servername => app_servername, :app_port => app_port)
 end
 #enables the vhost
 nginx_site app_url
