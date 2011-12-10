@@ -109,12 +109,19 @@ deploy_revision app_dir do
   environment       "RAILS_ENV" => "production"
   shallow_clone     true
   action            :deploy
-  restart_command   "/etc/init.d/app_#{app_url} restart"
+  #restart_command   "/etc/init.d/app_#{app_url} restart"
   notifies :restart, "service[solr_#{app_url}]"
+  notifies :restart, "service[app_#{app_url}]"
 end
 
 #start solr service if needed
 service "solr_#{app_url}" do
+  supports :status => true, :restart => true
+  action [ :enable, :start ]
+end
+
+#start the app service if needed
+service "app_#{app_url}" do
   supports :status => true, :restart => true
   action [ :enable, :start ]
 end
