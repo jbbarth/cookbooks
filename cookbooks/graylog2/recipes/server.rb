@@ -83,6 +83,7 @@ end
 # Service resource
 service "graylog2" do
   supports :restart => true
+  pattern "graylog2-server.jar"
   action [:enable, :start]
 end
 
