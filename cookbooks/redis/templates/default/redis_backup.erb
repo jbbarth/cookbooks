@@ -1,0 +1,18 @@
+#!/bin/sh
+
+backup_from=<%= node[:redis][:datadir] %>
+backup_to=<%= node[:redis][:backupdir] %>
+now=`date +'%Y-%m-%d-%H-%M'`
+
+<%= node[:redis][:prefix] %>/bin/redis-cli bgsave
+
+sleep 300
+
+<%= node[:redis][:prefix] %>/bin/redis-cli BGREWRITEAOF
+
+sleep 300
+
+mkdir -p $backup_to/$now
+cp -r $backup_from/* $backup_to/$now
+
+/usr/local/bin/redis_clean_backups
