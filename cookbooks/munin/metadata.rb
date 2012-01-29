@@ -1,0 +1,6 @@
+maintainer       "Jean-Baptiste Barth"
+maintainer_email "jeanbaptiste.barth@gmail.com"
+license          "Apache 2.0"
+description      "Installs munin-node and optionnally sends data to graphite"
+long_description "Installs munin-node and optionnally sends data to graphite"
+version          "0.1"
