@@ -1,0 +1,10 @@
+server {
+  listen   80;
+  server_name <%= @app_servername %>;
+
+  access_log  /var/log/nginx/<%= @app_url %>.access.log;
+
+  location / {
+    proxy_pass        http://localhost:<%= @app_port %>;
+  }
+}
