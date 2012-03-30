@@ -20,7 +20,7 @@
 app_url  = "orient-latin.com"
 app_servername = "www.orient-latin.com orient-latin.com forteresses.jbbarth.com"
 app_dir  = "/apps/#{app_url}"
-app_rvm  = "1.9.2@#{app_url}"
+app_rvm  = "1.9.3@#{app_url}"
 app_repo = "/home/mgoepp/orient-latin.git"
 app_rev  = "HEAD"
 app_user = "nobody"
