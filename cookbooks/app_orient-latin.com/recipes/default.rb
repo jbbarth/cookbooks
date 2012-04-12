@@ -96,6 +96,7 @@ deploy_revision app_dir do
       code <<-EOF
         source '/usr/local/rvm/scripts/rvm'
         rvm #{app_rvm} --create
+        gem list|grep passenger || gem install passenger
         bundle check || bundle
       EOF
     end
