@@ -23,7 +23,8 @@ fi
 groupadd -f -g 2001 rvm
 
 # install RVM
-bash < <( curl -s https://rvm.beginrescueend.com/install/rvm )
+curl -L https://get.rvm.io | bash -s stable --ruby
+
 
 if ! grep "# RVM" /root/.bashrc >/dev/null; then
   echo -e "\n# RVM\nsource /usr/local/rvm/scripts/rvm" >> /root/.bashrc
