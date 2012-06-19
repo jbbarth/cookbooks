@@ -11,16 +11,16 @@ if [ -s "/usr/local/rvm" ]; then
   exit
 fi
 
-# package dependencies
-if which apt-get >/dev/null 2>&1; then
+if test -e /etc/debian_version; then
+  # package dependencies
   apt-get install -y build-essential bison openssl libreadline5 libreadline5-dev \
                      curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev \
                      libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev \
                      autoconf libcurl4-openssl-dev file
-fi
 
-# rvm group
-groupadd -f -g 2001 rvm
+  # rvm group
+  groupadd -f -g 2001 rvm
+fi
 
 # install RVM
 curl -L https://get.rvm.io | bash -s stable --ruby
