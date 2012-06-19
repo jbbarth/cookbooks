@@ -30,7 +30,7 @@ bash "add-virtualbox-repository" do
   code <<-EOH
     wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
     echo "deb http://download.virtualbox.org/virtualbox/debian #{codename} contrib" > #{vbox_apt_file}
-    aptitude update
+    apt-get update
   EOH
   only_if { !File.exists?(vbox_apt_file) && codename }
 end
