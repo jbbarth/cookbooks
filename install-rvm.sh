@@ -2,7 +2,7 @@
 set -e
 
 if [ "$(id -u)" != 0 ]; then
-  echo "Vous devez lancer ce script avec l'utilisateur root!" >&2
+  echo "I don't think you're root kid!" >&2
   exit 1
 fi
 
