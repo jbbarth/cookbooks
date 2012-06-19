@@ -11,9 +11,9 @@ else
   exit 1
 fi
 
-# We work with ruby 1.9.2!
-if ! rvm list|grep 1.9.2 >/dev/null 2>/dev/null; then
-  echo "Install ruby 1.9.2: rvm install 1.9.2" >&2
+# We work with ruby 1.9.3!
+if ! rvm list|grep 1.9.3 >/dev/null 2>/dev/null; then
+  echo "Install ruby 1.9.3: rvm install 1.9.3" >&2
   exit 1
 fi
 
@@ -22,7 +22,7 @@ user="root"
 group="rvm"
 
 # Create a gemset
-rvm 1.9.2@chef --create
+rvm 1.9.3@chef --create
 
 # Install latest chef from rubygems.org
 gem install chef --no-ri --no-rdoc
