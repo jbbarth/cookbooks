@@ -31,7 +31,7 @@ if test -e /root/.bashrc && !grep "# RVM" /root/.bashrc >/dev/null; then
   source /root/.bashrc
 fi
 
-if ! grep "# RVM" /etc/skel/.bashrc >/dev/null; then
+if test -e /etc/skel/.bashrc && !grep "# RVM" /etc/skel/.bashrc >/dev/null; then
   sed -i 's/^.*PS1.*return$/if [[ -n "$PS1" ]]; then/' /etc/skel/.bashrc
   echo -e "\nfi #endof Interactive test\n# RVM\nsource /usr/local/rvm/scripts/rvm" >> /etc/skel/.bashrc
 fi
