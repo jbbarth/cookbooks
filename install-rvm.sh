@@ -26,7 +26,7 @@ fi
 curl -L https://get.rvm.io | bash -s stable --ruby
 
 
-if ! grep "# RVM" /root/.bashrc >/dev/null; then
+if test -e /root/.bashrc && !grep "# RVM" /root/.bashrc >/dev/null; then
   echo -e "\n# RVM\nsource /usr/local/rvm/scripts/rvm" >> /root/.bashrc
   source /root/.bashrc
 fi
