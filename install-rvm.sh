@@ -22,6 +22,10 @@ if test -e /etc/debian_version; then
   groupadd -f -g 2001 rvm
 fi
 
+if test -e /Library; then
+  dscl . -append /Groups/rvm GroupMembership $(echo $SUDO_USER)
+fi
+
 # install RVM
 curl -L https://get.rvm.io | bash -s stable --ruby
 
