@@ -1,28 +1,36 @@
 #!/bin/bash
 set -e
 
-# This script install chef with rubygems
+# This script installs chef with rubygems
 
-# You have to install RVM first
+# RVM VERSION
 if [ -s "/usr/local/rvm/scripts/rvm" ]; then
   source "/usr/local/rvm/scripts/rvm"
-else
-  echo "Install RVM first !" >&2
-  exit 1
-fi
+  # We work with ruby 1.9.3!
+  if ! rvm list|grep 1.9.3 >/dev/null 2>/dev/null; then
+    echo "Install ruby 1.9.3: rvm install 1.9.3" >&2
+    exit 1
+  fi
+  # Create a gemset
+  rvm 1.9.3@chef --create
 
-# We work with ruby 1.9.3!
-if ! rvm list|grep 1.9.3 >/dev/null 2>/dev/null; then
-  echo "Install ruby 1.9.3: rvm install 1.9.3" >&2
+# RBENV VERSION
+elif which rbenv >/dev/null 2>&1; then
+  # We work with ruby 1.9.3!
+  if ! rbenv version-name|grep 1.9.3 >/dev/null 2>/dev/null; then
+    echo "Install ruby 1.9.3: rbenv install 1.9.3-p194" >&2
+    exit 1
+  fi
+  # Create a gemset
+  rbenv gemset list | grep chef>/dev/null || rbenv gemset create $(rbenv version-name) chef
+else
+  echo "Install RVM or Rbenv first !" >&2
   exit 1
 fi
 
 # Credentials
-user="root"
-group="rvm"
-
-# Create a gemset
-rvm 1.9.3@chef --create
+user="jbbarth"
+group="staff"
 
 # Install latest chef from rubygems.org
 gem install chef --no-ri --no-rdoc
