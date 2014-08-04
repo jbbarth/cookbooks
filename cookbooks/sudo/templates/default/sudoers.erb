@@ -24,7 +24,7 @@ root  ALL=(ALL) ALL
 vagrant ALL=(ALL) NOPASSWD:ALL
 <% end -%>
 
-<% if @hostname == "raptor" -%>
+<% if %x(getent passwd jbbarth).lines.count >= 1 -%>
 # No passwd for me on my own laptop
 jbbarth ALL=(ALL) NOPASSWD: ALL
 <% end -%>
