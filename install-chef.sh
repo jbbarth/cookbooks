@@ -44,7 +44,7 @@ sudo find /var/chef -type f -exec chmod ug+rw,o-rwx {} \;
 # Populate it!
 cd /var/chef
 [ -d .git ] || git init
-git remote|grep origin >/dev/null || git remote add origin git://github.com/jbbarth/cookbooks.git
+git remote|grep origin >/dev/null || git remote add origin https://github.com/jbbarth/cookbooks.git
 git pull origin master
 
 # Define chef configuration (/etc/chef)
