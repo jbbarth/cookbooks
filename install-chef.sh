@@ -33,7 +33,7 @@ user="jbbarth"
 group="staff"
 
 # Install latest chef from rubygems.org
-gem install chef --no-ri --no-rdoc
+gem install chef --version 10.32.2 --no-ri --no-rdoc
 
 # Create chef cookbooks directory (/var/chef/cookbooks)
 sudo mkdir -p /var/chef
