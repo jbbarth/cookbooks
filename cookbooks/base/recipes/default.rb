@@ -23,7 +23,7 @@ execute "apt-get update" do
 end
 
 %w(screen ncurses-term sysv-rc-conf make nfs-common tree vim iftop
-   sqlite3 libsqlite3-dev libxslt1.1 libxslt1-dev gawk finger).each do |pkg|
+   sqlite3 libsqlite3-dev libxslt1.1 libxslt1-dev gawk finger aptitude).each do |pkg|
   apt_package pkg
 end
 
