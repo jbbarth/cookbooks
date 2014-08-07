@@ -27,6 +27,11 @@ end
   apt_package pkg
 end
 
+#remove useless packages
+apt_package "nano" do
+  action :purge
+end
+
 #motd
 execute "rm /etc/motd.tail && uname -snrvm > /etc/motd" do
   only_if { File.exists?("/etc/motd.tail") }
